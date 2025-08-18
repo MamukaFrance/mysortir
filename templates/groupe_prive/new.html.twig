@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New GroupePrive{% endblock %}
+
+{% block body %}
+    <h1>Create new GroupePrive</h1>
+
+    {{ include('groupe_prive/_form.html.twig') }}
+
+    <a class="uk-button uk-button-primary uk-border-rounded uk-margin" href="{{ path('app_groupe_prive_index') }}">back to list</a>
+{% endblock %}

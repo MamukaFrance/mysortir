@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GroupePrive index{% endblock %}
+
+{% block body %}
+    <h1>GroupePrive index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DateCreation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for groupe_prive in groupe_prives %}
+            <tr>
+                <td>{{ groupe_prive.id }}</td>
+                <td>{{ groupe_prive.nom }}</td>
+                <td>{{ groupe_prive.dateCreation ? groupe_prive.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_groupe_prive_show', {'id': groupe_prive.id}) }}">show</a>
+                    <a href="{{ path('app_groupe_prive_edit', {'id': groupe_prive.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_groupe_prive_new') }}">Create new</a>
+{% endblock %}
