@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>DateCreation</th>
                 <th>actions</th>
@@ -16,8 +15,8 @@
         </thead>
         <tbody>
         {% for groupe_prive in groupe_prives %}
+            {% if app.user == groupe_prive.createur %}
             <tr>
-                <td>{{ groupe_prive.id }}</td>
                 <td>{{ groupe_prive.nom }}</td>
                 <td>{{ groupe_prive.dateCreation ? groupe_prive.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
@@ -25,6 +24,7 @@
                     <a href="{{ path('app_groupe_prive_edit', {'id': groupe_prive.id}) }}">edit</a>
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>

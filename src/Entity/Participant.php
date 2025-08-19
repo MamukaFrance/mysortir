@@ -63,10 +63,10 @@ class Participant implements userinterface, passwordauthenticateduserinterface
      * @var collection<int, sortie>
      */
     #[orm\OneToMany(targetEntity: sortie::class, mappedBy: 'organisateur')]
-    private collection $organisateursorties;
+    private collection $organisateurorties;
 
     #[orm\Column]
-    private bool $isverified = false;
+    private bool $isVerified = false;
 
     /**
      * @var collection<int, groupeprive>
@@ -90,17 +90,17 @@ class Participant implements userinterface, passwordauthenticateduserinterface
         $this->participantgroupeprives = new arraycollection();
     }
 
-    public function getid(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getemail(): ?string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setemail(string $email): static
+    public function setEmail(string $email): static
     {
         $this->email = $email;
 
@@ -112,7 +112,7 @@ class Participant implements userinterface, passwordauthenticateduserinterface
      *
      * @see userinterface
      */
-    public function getuseridentifier(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
@@ -120,7 +120,7 @@ class Participant implements userinterface, passwordauthenticateduserinterface
     /**
      * @see userinterface
      */
-    public function getroles(): array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has role_user
@@ -142,12 +142,12 @@ class Participant implements userinterface, passwordauthenticateduserinterface
     /**
      * @see passwordauthenticateduserinterface
      */
-    public function getpassword(): ?string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setpassword(string $password): static
+    public function setPassword(string $password): static
     {
         $this->password = $password;
 
@@ -160,72 +160,72 @@ class Participant implements userinterface, passwordauthenticateduserinterface
         // @deprecated, to be removed when upgrading to symfony 8
     }
 
-    public function getnom(): ?string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setnom(string $nom): static
+    public function setNom(string $nom): static
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getprenom(): ?string
+    public function getPrenom(): ?string
     {
         return $this->prenom;
     }
 
-    public function setprenom(string $prenom): static
+    public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function gettelephone(): ?string
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function settelephone(?string $telephone): static
+    public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
 
         return $this;
     }
 
-    public function isadministrateur(): ?bool
+    public function isAdministrateur(): ?bool
     {
         return $this->administrateur;
     }
 
-    public function setadministrateur(bool $administrateur): static
+    public function setAdministrateur(bool $administrateur): static
     {
         $this->administrateur = $administrateur;
 
         return $this;
     }
 
-    public function isactif(): ?bool
+    public function isActif(): ?bool
     {
         return $this->actif;
     }
 
-    public function setactif(bool $actif): static
+    public function setActif(bool $actif): static
     {
         $this->actif = $actif;
 
         return $this;
     }
 
-    public function getsite(): ?site
+    public function getSite(): ?site
     {
         return $this->site;
     }
 
-    public function setsite(?site $site): static
+    public function setSite(?site $site): static
     {
         $this->site = $site;
 
@@ -235,25 +235,25 @@ class Participant implements userinterface, passwordauthenticateduserinterface
     /**
      * @return collection<int, sortie>
      */
-    public function getsorties(): collection
+    public function getSorties(): collection
     {
         return $this->sorties;
     }
 
-    public function addsorty(sortie $sorty): static
+    public function addSorty(sortie $sorty): static
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties->add($sorty);
-            $sorty->addparticipant($this);
+            $sorty->addParticipant($this);
         }
 
         return $this;
     }
 
-    public function removesorty(sortie $sorty): static
+    public function removeSorty(sortie $sorty): static
     {
-        if ($this->sorties->removeelement($sorty)) {
-            $sorty->removeparticipant($this);
+        if ($this->sorties->removeElement($sorty)) {
+            $sorty->removeParticipant($this);
         }
 
         return $this;
@@ -262,39 +262,39 @@ class Participant implements userinterface, passwordauthenticateduserinterface
     /**
      * @return collection<int, sortie>
      */
-    public function getorganisateursorties(): collection
+    public function getOrganisateurSorties(): collection
     {
         return $this->organisateursorties;
     }
 
-    public function addorganisateursorty(sortie $organisateursorty): static
+    public function addOrganisateurSorty(sortie $organisateursorty): static
     {
         if (!$this->organisateursorties->contains($organisateursorty)) {
             $this->organisateursorties->add($organisateursorty);
-            $organisateursorty->setorganisateur($this);
+            $organisateursorty->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeorganisateursorty(sortie $organisateursorty): static
+    public function removeOrganisateursorty(sortie $organisateursorty): static
     {
         if ($this->organisateursorties->removeelement($organisateursorty)) {
             // set the owning side to null (unless already changed)
-            if ($organisateursorty->getorganisateur() === $this) {
-                $organisateursorty->setorganisateur(null);
+            if ($organisateursorty->getOrganisateur() === $this) {
+                $organisateursorty->setOrganisateur(null);
             }
         }
 
         return $this;
     }
 
-    public function isverified(): bool
+    public function isVerified(): bool
     {
-        return $this->isverified;
+        return $this->isVerified();
     }
 
-    public function setisverified(bool $isverified): static
+    public function setIsVerified(bool $isverified): static
     {
         $this->isverified = $isverified;
 

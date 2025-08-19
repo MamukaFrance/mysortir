@@ -22,6 +22,14 @@
         {{include ('_navbar.html.twig') }}
     </header>
     <main class="uk-container">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="uk-alert-{{ label }} uk-margin-small" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </main>
     <footer> <p class="uk-text-center text-body-secondary">@My-Sortir - {{ 'now' | date('Y') }}</p></footer>

@@ -160,3 +160,7 @@ form input{
     display: inline-flex;
     border: 1px solid white;
 }
+
+.custom-border {
+    border: 2px solid white;
+}
